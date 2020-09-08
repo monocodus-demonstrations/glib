@@ -1,86 +1,18 @@
-rgtk
-====
+# glib [![Build Status](https://travis-ci.org/gtk-rs/glib.png?branch=master)](https://travis-ci.org/gtk-rs/glib) [![Build status](https://ci.appveyor.com/api/projects/status/jphtjb5hr51970fh?svg=true)](https://ci.appveyor.com/project/GuillaumeGomez/glib-l2j1a) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gtk-rs/gtk)
 
-__Rust__ bindings and wrappers for __GTK+__
+GLib bindings for Rust.
 
+Alongside GLib bindings, this crate also includes the infrastructure to
+subclass `GObject` for extending libraries like GTK+. A code example can
+be found in the documentation of this crate in the `subclass` module.
 
-Installation
-============
+- [Gtk-rs project site](http://gtk-rs.org/)
 
-__rgtk__ use autoconf tools to build, so you should install them on your system.
+- [Online documentation](http://gtk-rs.org/docs/)
 
-You should install __GTK+__ developpement library before install __rgtk__.
+- [Readme](https://github.com/gtk-rs/gtk/blob/master/README.md) in our
+  [main repo](https://github.com/gtk-rs/gtk)
 
-__rgtk__ use the version 3.10 of __GTK+__, so it should be up to date or the library cannot build.
+## License
 
-Then you can build __rgtk__ in two steps: 
-
-* First build a little c-glue library to deal with some gtk macros by typing :
-
-```Shell
-> make glue
-```
-
-* next you can build __rgtk__ with the following command :
-
-```Shell
-> make 
-```
-
-* you can build an awful test main which display some widget :
-
-```Shell
-> make test
-```
-
-__rgtk__ should build / work on osx and Linux.
-
-
-Use __rgtk__
-============
-
-To respect __GTK+__ inheritence, all the functionnalities of gtk widgets are dispatched between class implementation and trait default methods.
-
-That's why all the widgets are in the module gtk, and all the main traits are reexport on the main module of __rgtk__.
-
-To use __rgtk__, you can simply do :
-
-```Rust
-extern mod rgtk;
-use rgtk::*;
-```
-
-You can now access easily all the widgets and all the traits methods:
-
-```Rust
-let button = gtk::Button:new(); // You have access to the methods of the button and all the method of the trait GtkButton.
-```
-
-
-Contribute
-==========
-
-Contributor you're welcome !
-
-You probably know but __Gtk+__ use it own Object system : inherited class and interface.
-
-To respect this design I follow a special design on __rgtk__ :
-
-* Interface -> Implement them on a trait with only default methods.
-* Class -> Implement the construct on the class impl and other methods on a traits.
-* Sub-class -> Implement all the methods on the class.
-
-Exemple for GtkOrientable, GtkBox, GtkButtonBox :
-
-GtkOrientable is an interface with all the methods implemented as default method of the trait GtkOrientable.
-
-GtkBox is a class with constructors implemented on the class gtk::Box, and the other method as default methods of the trait GtkBox. So gtk::Box implement GtkOrientable and GtkBox.
-
-GtkButtonBox is a sub-class of GtkBox, the class gtk::ButtonBox implement all the methods of GtkButtonBox, the trait GtkOrientable and GtkBox.
-
-Finally all the gtk widget implements the traits GtkWidget.
-
-License
-=======
-
-__rgtk__ is available under the same license term than GTK+, the LGPL (Lesser General Public license). 
+MIT
